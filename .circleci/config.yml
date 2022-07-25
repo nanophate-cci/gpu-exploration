@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004-cuda-11.4:202110-01
+    # try w/o .multi since it does not seem to be documented:
+    # https://circleci.com/docs/using-gpu#linux-gpu
+    resource_class: gpu.nvidia.small
+    steps:
+      - run: |
+          which python
+          python --version
+      - run: |
+          which pyenv
+          pyenv --version
+      - run: |
+          pyenv versions
+      - run: |
+          pyenv install -v 3.8.1
+          pyenv global 3.8.1
+      - run: |
+          which python
+          python --version
